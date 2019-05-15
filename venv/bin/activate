@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/fish/PycharmProjects/Python-Flask-Learn/venv"
+VIRTUAL_ENV="/Users/fish/Documents/workspace/Python-Flask-Learn/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
