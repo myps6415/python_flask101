@@ -17,7 +17,8 @@ def shutdown_session(exception=None):
 
 @app.route('/')
 def start():
-    return 'Hello World!'
+    now = datetime.datetime.now()
+    return render_template('start.html', now= now)
 
 
 @app.route('/create-restaurant', methods = ['GET', 'POST'])
@@ -31,7 +32,7 @@ def create_restaurant():
         db_session.add(restaurant)
         db_session.commit()
 
-        return '{}, {}, {}'.format(name, description, site_url)
+        return redirect('/restaurants')
 
     return render_template('create_restaurant.html')
 
@@ -76,6 +77,19 @@ def delete_resaurant():
 
     return redirect('/restaurants')
 
+
+def mealformat(value):
+    if value.hour in [4, 5, 6, 7, 8, 9]:
+        return 'Breakfast'
+    elif value.hour in [10, 11, 12, 13, 14, 15]:
+        return 'Lunch'
+    elif value.hour in [16, 17, 18, 19, 20, 21]:
+        return 'Dinner'
+    else:
+        return 'Supper'
+
+
+app.jinja_env.filters['meal'] = mealformat
 
 if __name__ == '__main__':
     app.jinja_env.auto_reload = True
