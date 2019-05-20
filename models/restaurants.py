@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from database import Base
+from sqlalchemy.orm import relationship
 import uuid
 import datetime
 
@@ -12,6 +13,10 @@ class Restaurants(Base):
     draw = Column(Integer(), default=0)
     create_time = Column(DateTime(), nullable=False)
     modified_time = Column(DateTime(), nullable=False)
+    histories = relationship(
+        'Histories',
+        backref='restaurants'
+    )
 
     def __init__(self, name, description, site_url):
         self.id = str(uuid.uuid4())
