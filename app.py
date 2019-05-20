@@ -112,6 +112,13 @@ def history():
     return render_template('history.html', histories=histories)
 
 
+@app.route('/top')
+def top():
+    restaurants = Restaurants.query.order_by(desc('draw')).limit(5)
+
+    return render_template('top.html', restaurants=restaurants)
+
+
 def mealformat(value):
     if value.hour in [4, 5, 6, 7, 8, 9]:
         return 'Breakfast'
